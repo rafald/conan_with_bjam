@@ -45,7 +45,7 @@ jobs:
 
     - name: build
       shell: bash
-      run: conan build . $BUILD_TYPE
+      run: conan build . # $BUILD_TYPE
 
     - name: test
       shell: bash
