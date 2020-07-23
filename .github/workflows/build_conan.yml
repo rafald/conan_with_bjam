@@ -47,9 +47,9 @@ jobs:
     - name: Build
       working-directory: ${{runner.workspace}} #/build
       shell: bash # the step fails if missing!
-      run: conan build ${{runner.workspace}} # $BUILD_TYPE # You can specify a specific target with "--target <NAME>"
+      run: conan build $GITHUB_WORKSPACE # $BUILD_TYPE # You can specify a specific target with "--target <NAME>"
 
     - name: Test
       working-directory: ${{runner.workspace}} #/build
       shell: bash
-      run: conan build --test ${{runner.workspace}}
+      run: conan build --test $GITHUB_WORKSPACE
