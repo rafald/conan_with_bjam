@@ -40,8 +40,8 @@ jobs:
     - name: configure
       shell: bash
       run: |
-              mkdir build && conan build -bf build --configure -s build_type=$BUILD_TYPE .
-              #mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+              mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE # calls conan install ...
+              #mkdir build && conan build -bf build --configure -s build_type=$BUILD_TYPE .
 
     - name: build
       shell: bash

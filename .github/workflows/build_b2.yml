@@ -39,13 +39,13 @@ jobs:
     - name: configure
       shell: bash
       run: |
-              conan install conanfile.py
-              #conan build --configure . # $BUILD_TYPE 
+              conan install -s build_type=$BUILD_TYPE conanfile.py
+              #conan build --configure -s build_type=$BUILD_TYPE . # $BUILD_TYPE 
     - name: build
       shell: bash
-      run: conan build . # $BUILD_TYPE
+      run: conan build .-s build_type=$BUILD_TYPE 
 
     - name: test
       shell: bash
-      run: conan build --test .
+      run: conan build --test -s build_type=$BUILD_TYPE .
 
