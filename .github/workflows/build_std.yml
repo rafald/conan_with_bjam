@@ -1,4 +1,4 @@
-name: C/C++ CI conan/bjam
+name: C/C++ CI std
 on: [push]
 env:
   BUILD_TYPE: Release # Release, Debug, RelWithDebInfo, etc.
@@ -7,7 +7,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest] #, windows-latest, windows-2016]
+        os: [ubuntu-latest, macOS-latest, windows-latest, windows-2016]
     
     steps:
     - name: Checkout
@@ -28,7 +28,7 @@ jobs:
     - name: Cache Conan
       uses: actions/cache@v2
       env:
-        cache-name: cache-conan-bjam-std
+        cache-name: cache-conan-std
       with:
         path: ~/.conan/
         key: ${{ matrix.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/CMakeLists.txt') }} #key: ${{ runner.os }}-
@@ -39,14 +39,12 @@ jobs:
     
     - name: configure
       shell: bash
-      run: |
-              conan install . 
-              #conan build --configure . # $BUILD_TYPE 
+      run: mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE 
 
     - name: build
       shell: bash
-      run: conan build . # $BUILD_TYPE
+      run: cmake --build build --config $BUILD_TYPE
 
     - name: test
       shell: bash
-      run: conan build --test .
+      run: cd build && ctest -C $BUILD_TYPE
