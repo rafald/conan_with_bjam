@@ -21,7 +21,6 @@ jobs:
     - name: Create Build Environment
       #shell: bash # ON W$ FOR SOME F.REASON using bash in this step causes a failure in configure step
       run: |
-       cmake -E make_directory ${{runner.workspace}}/build
        python -m pip install --upgrade pip
        pip3 install wheel setuptools 
        pip3 install conan
@@ -29,7 +28,7 @@ jobs:
     - name: Cache Conan
       uses: actions/cache@v2
       env:
-        cache-name: cache-conan-CMake
+        cache-name: cache-conan-bjam
       with:
         path: ~/.conan/
         key: ${{ matrix.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/CMakeLists.txt') }} #key: ${{ runner.os }}-
@@ -38,17 +37,19 @@ jobs:
           ${{ matrix.os }}-build-
           ${{ matrix.os }}-
 
-    - name: Configure CMake
+    - name: Configure bjam
       shell: bash # MUST BE BASH TO SUCCEED!!! Use a bash shell so we can use the same syntax for environment variable access regardless of the host operating system
-      working-directory: ${{runner.workspace}}/build
-      run: cmake -S $GITHUB_WORKSPACE -DCMAKE_BUILD_TYPE=$BUILD_TYPE # -DHUNTER_STATUS_DEBUG=ON # -S -DCMAKE_PROJECT_INCLUDE_BEFORE:STRING=SetupHunter.cmake
+      working-directory: ${{runner.workspace}} #/build
+      run: |
+              conan install $GITHUB_WORKSPACE # -DCMAKE_BUILD_TYPE=$BUILD_TYPE 
+              #conan build --configure . # $BUILD_TYPE
 
     - name: Build
-      working-directory: ${{runner.workspace}}/build
+      working-directory: ${{runner.workspace}} #/build
       shell: bash # the step fails if missing!
-      run: cmake --build . --config $BUILD_TYPE # You can specify a specific target with "--target <NAME>"
+      run: conan build ${{runner.workspace}} # $BUILD_TYPE # You can specify a specific target with "--target <NAME>"
 
     - name: Test
-      working-directory: ${{runner.workspace}}/build
+      working-directory: ${{runner.workspace}} #/build
       shell: bash
-      run: ctest -C $BUILD_TYPE # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
+      run: conan build --test ${{runner.workspace}}
