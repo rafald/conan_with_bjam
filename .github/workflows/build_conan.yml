@@ -49,7 +49,7 @@ jobs:
               #conan build --configure . # $BUILD_TYPE
 
     - name: Build
-      working-directory: $GITHUB_WORKSPACE # ${{runner.workspace}} #/build
+      working-directory: "$GITHUB_WORKSPACE" # ${{runner.workspace}} #/build
       shell: bash # the step fails if missing!
       run: conan build -if "$GITHUB_WORKSPACE" "$GITHUB_WORKSPACE" # $BUILD_TYPE # You can specify a specific target with "--target <NAME>"
 
