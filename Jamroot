@@ -1,5 +1,14 @@
 # jamroot.jam
-project foobar ;
-#ECHO "ala ma kota" ;
+project foobar :
+  requirements
+     #<implicit-dependency>/folly//libs
+     #<library>/folly
+     #<use>/folly//libs
+   <link>shared
+   <host-os>linux:<linkflags>"-Wl,--no-as-needed -ldl"
+;
+
 #alias foobar : /Catch2//libs ;
 alias foobar : /catch2//libs ;
+
+exe main : main.cpp /folly//libs/<link>shared ;
