@@ -41,8 +41,10 @@ jobs:
       shell: bash # MUST BE BASH TO SUCCEED!!! Use a bash shell so we can use the same syntax for environment variable access regardless of the host operating system
       working-directory: ${{runner.workspace}} #/build
       run: |
-              conan install $GITHUB_WORKSPACE # -DCMAKE_BUILD_TYPE=$BUILD_TYPE 
+              conan install -if "$GITHUB_WORKSPACE" "$GITHUB_WORKSPACE" # -DCMAKE_BUILD_TYPE=$BUILD_TYPE 
+              echo $GITHUB_WORKSPACE
               ls -l $GITHUB_WORKSPACE
+              echo ${{runner.workspace}}
               ls -l ${{runner.workspace}}
               #conan build --configure . # $BUILD_TYPE
 
