@@ -1,4 +1,4 @@
-name: C/C++ CI std
+name: C/C++ CI conan/bjam
 on: [push]
 env:
   BUILD_TYPE: Release # Release, Debug, RelWithDebInfo, etc.
@@ -28,7 +28,7 @@ jobs:
     - name: Cache Conan
       uses: actions/cache@v2
       env:
-        cache-name: cache-conan-std
+        cache-name: cache-conan-bjam-std
       with:
         path: ~/.conan/
         key: ${{ matrix.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/CMakeLists.txt') }} #key: ${{ runner.os }}-

@@ -1,4 +1,4 @@
-name: CMake
+name: conan/bjam
 on: [push]
 env:
   BUILD_TYPE: Release # Release, Debug, RelWithDebInfo, etc.
