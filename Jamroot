@@ -6,6 +6,7 @@ project foobar :
      #<use>/folly//libs
    <link>shared
    <host-os>linux:<linkflags>"-Wl,--no-as-needed -ldl"
+   <address-model>64
 ;
 
 #alias foobar : /Catch2//libs ;
