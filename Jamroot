@@ -1,0 +1,5 @@
+# jamroot.jam
+project foobar ;
+#ECHO "ala ma kota" ;
+#alias foobar : /Catch2//libs ;
+alias foobar : /catch2//libs ;
