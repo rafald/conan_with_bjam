@@ -39,7 +39,9 @@ jobs:
     
     - name: configure
       shell: bash
-      run: conan build --configure . # $BUILD_TYPE 
+      run: |
+              conan install . 
+              #conan build --configure . # $BUILD_TYPE 
 
     - name: build
       shell: bash
