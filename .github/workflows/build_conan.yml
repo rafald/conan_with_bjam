@@ -42,6 +42,8 @@ jobs:
       working-directory: ${{runner.workspace}} #/build
       run: |
               conan install $GITHUB_WORKSPACE # -DCMAKE_BUILD_TYPE=$BUILD_TYPE 
+              ls -l $GITHUB_WORKSPACE
+              ls -l ${{runner.workspace}}
               #conan build --configure . # $BUILD_TYPE
 
     - name: Build
