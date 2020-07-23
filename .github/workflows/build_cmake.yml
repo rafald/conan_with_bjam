@@ -39,12 +39,18 @@ jobs:
     
     - name: configure
       shell: bash
-      run: mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE # TODO try 'conan build --configure .'
+      run: |
+              mkdir build && conan build -bf build --configure -s build_type=$BUILD_TYPE .
+              #mkdir build && cd build && cmake .. -DCMAKE_BUILD_TYPE=$BUILD_TYPE
 
     - name: build
       shell: bash
-      run: cmake --build build --config $BUILD_TYPE # TODO try 'conan build .'
+      run: |
+              conan build -bf build -s build_type=$BUILD_TYPE .
+              #cmake --build build --config $BUILD_TYPE # TODO try 'conan build .'
 
     - name: test
       shell: bash
-      run: cd build && ctest -C $BUILD_TYPE
+      run: |
+              conan build -bf build --test -s build_type=$BUILD_TYPE .
+              #cd build && ctest -C $BUILD_TYPE
