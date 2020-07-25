@@ -1,4 +1,4 @@
-name: C/C++ CI conan/cmake std
+name: C/C++ CI cmake
 on: [push]
 env:
   BUILD_TYPE: Release # Release, Debug, RelWithDebInfo, etc.

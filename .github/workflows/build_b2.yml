@@ -1,4 +1,4 @@
-name: C/C++ CI conan/b2 std
+name: C/C++ CI v2
 on: [push]
 env:
   BUILD_TYPE: Release # Release, Debug, RelWithDebInfo, etc.
