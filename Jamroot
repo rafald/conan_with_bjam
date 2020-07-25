@@ -13,4 +13,4 @@ project foobar :
 #alias foobar : /Catch2//libs ;
 alias foobar : /catch2//libs ;
 
-exe main : main.cpp /folly//libs/<link>shared ;
+exe main : src/main.cpp /folly//libs/<link>shared ;

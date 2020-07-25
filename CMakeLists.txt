@@ -14,6 +14,6 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
   endif()
 endif()
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_libraries(${PROJECT_NAME} CONAN_PKG::folly)
 set_target_properties(${PROJECT_NAME} PROPERTIES CXX_STANDARD 14)
